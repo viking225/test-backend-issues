@@ -1,8 +1,9 @@
 import { Container } from "inversify";
-import express, { Express } from "express";
+import * as express from "express";
+
 import { buildAppRoutes } from "../routes";
 
-export function configureServer(app: Express, container: Container) {
+export function configureServer(app: express.Express, container: Container) {
   app.use(express.json());
   app.use("/", buildAppRoutes(container));
 }

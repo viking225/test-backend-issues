@@ -61,7 +61,7 @@ describe('CreateIssuesUseCase', () => {
                 problemId: '2'
             })
         ]);
-    })
+    });
 
     it('Should return 2 issues with 2 problems', () => {
         sut.whenCommandIs({
@@ -98,9 +98,9 @@ describe('CreateIssuesUseCase', () => {
         let issueCount = 1;
         let problemCount = 1;
         const saveProblemMock = jest.fn().mockImplementation((problem) => {
-            problem.id = `${problemCount}`
-            problemCount++
-            return problem
+            problem.id = `${problemCount}`;
+            problemCount++;
+            return problem;
         });
         const issueRepo = {
             save: jest.fn().mockImplementation((issues: Issue[]) => {

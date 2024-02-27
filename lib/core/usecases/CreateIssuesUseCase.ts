@@ -33,29 +33,29 @@ export class CreateIssuesUseCase extends UseCase<CreateIssueCommand, Issue[]> {
     }
 
     let issuesToSave: Issue[] = [];
-    const problemDictionnary: {[Id: string]: {video: string; category: string; issues: Issue[]}} = {}
+    const problemDictionnary: {[Id: string]: {video: string; category: string; issues: Issue[]}} = {};
 
     this.command.items.forEach((item)  => {
 
         if (!problemDictionnary[`${item.video}-${item.category}`]) {
-            problemDictionnary[`${item.video}-${item.category}`] = {video: item.video, category: item.category, issues: []}
+            problemDictionnary[`${item.video}-${item.category}`] = {video: item.video, category: item.category, issues: []};
         }
         problemDictionnary[`${item.video}-${item.category}`].issues.push(new Issue({
             comment: item.comment
-        }))
+        }));
     });
 
     for (const id in problemDictionnary) {
-        const item = problemDictionnary[id]
+        const item = problemDictionnary[id];
         const savedProblem = this.problemRepo.saveOne(new Problem({
             video: item.video,
             category: item.category,
             status: 'open'
-        }))
+        }));
         issuesToSave =  [...issuesToSave, ...problemDictionnary[id].issues.map((issue) => {
-            issue.problemId = savedProblem.id
+            issue.problemId = savedProblem.id;
             return issue;
-        })]
+        })];
     }
     const savedIssues = this.issueRepo.save(issuesToSave);
 

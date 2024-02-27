@@ -1,9 +1,9 @@
 const APP_IDENTIFIERS = {
-  // Database
-  MemoryDatabase: Symbol.for("MemoryDatabase"),
   // Repository
   IssueRepository: Symbol.for("IssueRepository"),
-  ProblemRepository: Symbol.for("ProblemRepository")
+  ProblemRepository: Symbol.for("ProblemRepository"),
+  // UseCases
+  CreateIssuesUseCase: Symbol.for('CreateIssuesUseCase'),
 };
 
 export { APP_IDENTIFIERS };
