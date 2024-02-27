@@ -1,25 +1,13 @@
-type Issue = {
-    id: number;
-}
-
-
-type Problem = {
-    id: string
-}
-
-type Ticket = {
-    id: string
-}
-
+import { Issue, Problem, Ticket } from "../core/schemas/entities";
 
 export function initDatabase() {
-    const issues = new Map<string, Issue>();
-    const problems = new Map<string, Problem>();
-    const tickets = new Map<string, Ticket>();
+  const issues = new Map<string, Issue>();
+  const problems = new Map<string, Problem>();
+  const tickets = new Map<string, Ticket>();
 
-    return {
-        issues,
-        problems,
-        tickets
-    };
+  return {
+    issues,
+    problems,
+    tickets,
+  };
 }

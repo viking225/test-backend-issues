@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "strictPropertyInitialization": false,
+    "strict": true,
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "ES2022",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "outDir": "dist",
+    "sourceMap": true
+  },
+  "exclude": ["node_modules"]
+}
