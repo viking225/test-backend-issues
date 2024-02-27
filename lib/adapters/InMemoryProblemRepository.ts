@@ -1,11 +1,10 @@
-import { ProblemRepository } from "../core/repositories/ProblemRepository";
-import { Problem } from "../core/schemas/entities";
-import { MemoryDbConnection } from "./database";
+import { ProblemRepository } from '../core/repositories/ProblemRepository';
+import { Problem } from '../core/schemas/entities';
+import { MemoryDbConnection } from './database';
 import { v4 as uuidv4 } from 'uuid';
 
 export class InMemoryProblemRepository implements ProblemRepository {
-    constructor(private inMemoryDb: MemoryDbConnection) {
-    }
+    constructor(private inMemoryDb: MemoryDbConnection) {}
     saveOne(data: Problem): Problem {
         let id = data.id;
         if (!data.id) {
@@ -16,10 +15,9 @@ export class InMemoryProblemRepository implements ProblemRepository {
         return data;
     }
     save(data: Problem | Problem[]): Problem[] {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
     get(id: string): Problem {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
-
 }

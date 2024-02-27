@@ -1,10 +1,10 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 
-import { InvalidCommandError } from "../schemas/errors";
-import { CreateIssueCommand, CreateIssuesUseCase } from "./CreateIssuesUseCase";
-import { Issue, Problem } from "../schemas/entities";
-import { IssueRepository } from "../repositories/IssueRepository";
-import { ProblemRepository } from "../repositories/ProblemRepository";
+import { InvalidCommandError } from '../schemas/errors';
+import { CreateIssueCommand, CreateIssuesUseCase } from './CreateIssuesUseCase';
+import { Issue, Problem } from '../schemas/entities';
+import { IssueRepository } from '../repositories/IssueRepository';
+import { ProblemRepository } from '../repositories/ProblemRepository';
 
 describe('CreateIssuesUseCase', () => {
     let sut: ReturnType<typeof createSut>;
@@ -15,7 +15,7 @@ describe('CreateIssuesUseCase', () => {
 
     it('Should return empty array if no issues', () => {
         sut.whenCommandIs({
-            items: []
+            items: [],
         });
 
         sut.thenShouldReturn([]);
@@ -28,38 +28,39 @@ describe('CreateIssuesUseCase', () => {
                     video: 'test',
                     category: 'last',
                     userId: 10,
-                    comment: 'beau'
+                    comment: 'beau',
                 },
                 {
                     video: 'data',
                     category: 'second',
                     userId: 10,
-                    comment: 'beaugar'
-                }, {
+                    comment: 'beaugar',
+                },
+                {
                     video: 'data',
                     category: 'second',
                     userId: 30,
-                    comment: 'moche'
-                }
-            ]
+                    comment: 'moche',
+                },
+            ],
         });
 
         sut.thenShouldReturn([
             new Issue({
                 id: '1',
                 comment: 'beau',
-                problemId: '1'
+                problemId: '1',
             }),
             new Issue({
                 id: '2',
                 comment: 'beaugar',
-                problemId: '2'
+                problemId: '2',
             }),
             new Issue({
                 id: '3',
                 comment: 'moche',
-                problemId: '2'
-            })
+                problemId: '2',
+            }),
         ]);
     });
 
@@ -70,27 +71,28 @@ describe('CreateIssuesUseCase', () => {
                     video: 'test',
                     category: 'first',
                     userId: 10,
-                    comment: 'beau'
-                }, {
+                    comment: 'beau',
+                },
+                {
                     video: 'data',
                     category: 'second',
                     userId: 30,
-                    comment: 'moche'
-                }
-            ]
+                    comment: 'moche',
+                },
+            ],
         });
 
         sut.thenShouldReturn([
             new Issue({
                 id: '1',
                 comment: 'beau',
-                problemId: '1'
+                problemId: '1',
             }),
             new Issue({
                 id: '2',
                 comment: 'moche',
-                problemId: '2'
-            })
+                problemId: '2',
+            }),
         ]);
     });
 
@@ -109,11 +111,11 @@ describe('CreateIssuesUseCase', () => {
                     issueCount++;
                     return issue;
                 });
-            })
+            }),
         } as unknown as IssueRepository;
 
         const problemRepo = {
-            saveOne: saveProblemMock
+            saveOne: saveProblemMock,
         } as unknown as ProblemRepository;
 
         const uc = new CreateIssuesUseCase(issueRepo, problemRepo);
@@ -122,13 +124,9 @@ describe('CreateIssuesUseCase', () => {
             uc.command = command;
         }
 
-        function thenShouldThrowInvalidCommandError() {
-            expect(uc.execute()).toThrow(InvalidCommandError);
-        }
-
-        function thenShouldReturn(data: unknown){
+        function thenShouldReturn(data: unknown) {
             expect(uc.execute()).toEqual(data);
-        } 
+        }
 
         function thenShouldSaveProblems(problems: Problem[]) {
             expect(saveProblemMock).toHaveBeenCalled();
@@ -137,7 +135,6 @@ describe('CreateIssuesUseCase', () => {
 
         return {
             whenCommandIs,
-            thenShouldThrowInvalidCommandError,
             thenShouldReturn,
             thenShouldSaveProblems,
         };

@@ -1,6 +1,7 @@
-import { Issue } from "../schemas/entities";
+import { Issue } from '../schemas/entities';
 
 export interface IssueRepository {
-  save(data: Issue | Issue[]): Issue[];
-  get(id: string): Issue;
+    save(data: Issue | Issue[]): Issue[];
+    get(id: string): Issue;
+    getByProblemId(problemId: string): Issue[]
 }
