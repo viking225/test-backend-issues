@@ -5,7 +5,7 @@ export abstract class UseCase<Commands, Response> {
 
   with(command: Commands) {
     this.command = command;
-    return this
+    return this;
   }
 
   abstract execute(): Response | Promise<Response>;

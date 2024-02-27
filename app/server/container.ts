@@ -11,6 +11,6 @@ export function createAppContainer(database: MemoryDbConnection): Container {
   container.bind(APP_IDENTIFIERS.CreateIssuesUseCase).to(CreateIssuesUseCase);
   // Repo
   container.bind(APP_IDENTIFIERS.IssueRepository).toDynamicValue(() => new InMemoryIssueRepository(database));
-  container.bind(APP_IDENTIFIERS.ProblemRepository).toDynamicValue(() => new InMemoryProblemRepository(database))
+  container.bind(APP_IDENTIFIERS.ProblemRepository).toDynamicValue(() => new InMemoryProblemRepository(database));
   return container;
 }
