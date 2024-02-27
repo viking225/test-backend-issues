@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import "reflect-metadata";
 
 import { UseCase } from "../schemas/UseCase";
-import { Issue, Problem } from "../schemas/entities";
+import { Issue, Problem, ProblemStatus } from "../schemas/entities";
 import { APP_IDENTIFIERS } from "../constants/symbol";
 import { IssueRepository } from "../repositories/IssueRepository";
 import { ProblemRepository } from "../repositories/ProblemRepository";
@@ -50,7 +50,7 @@ export class CreateIssuesUseCase extends UseCase<CreateIssueCommand, Issue[]> {
         const savedProblem = this.problemRepo.saveOne(new Problem({
             video: item.video,
             category: item.category,
-            status: 'open'
+            status: ProblemStatus.open
         }));
         issuesToSave =  [...issuesToSave, ...problemDictionnary[id].issues.map((issue) => {
             issue.problemId = savedProblem.id;

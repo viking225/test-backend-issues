@@ -8,11 +8,14 @@ export class Issue {
   }
 }
 
+export  enum ProblemStatus  {
+  pending = 'pending', ready = 'ready' , open = 'open' , closed = 'closed'
+}
 export class Problem {
   id: string;
   video: string;
   category: string;
-  status: 'pending' | 'ready' | 'open' | 'closed';
+  status: ProblemStatus;
 
   constructor(data: Partial<Problem> = {}) {
     Object.assign(this, data);

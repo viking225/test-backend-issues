@@ -8,11 +8,11 @@ export class InMemoryIssueRepository implements IssueRepository {
     }
     save(data: Issue | Issue[]): Issue[] {
         if (!Array.isArray(data)) {
-            data = [data]
+            data = [data];
         }
         data.forEach((issue) => {
             if (!issue.id) {
-                issue.id = uuidv4()
+                issue.id = uuidv4();
             }
             this.inMemoryDb.issues.set(issue.id, issue);
         });
