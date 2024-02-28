@@ -5,6 +5,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 export class InMemoryIssueRepository implements IssueRepository {
     constructor(private inMemoryDb: MemoryDbConnection) {}
+    getByProblemId(problemId: string): Issue[] {
+        const issues = [];
+        for (let [key, value] of this.inMemoryDb.issues) {
+            if (value.problemId === problemId) {
+                issues.push(value);
+            }
+        }
+        return issues;
+    }
     save(data: Issue | Issue[]): Issue[] {
         if (!Array.isArray(data)) {
             data = [data];

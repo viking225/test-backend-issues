@@ -4,6 +4,7 @@ const APP_IDENTIFIERS = {
     ProblemRepository: Symbol.for('ProblemRepository'),
     // UseCases
     CreateIssuesUseCase: Symbol.for('CreateIssuesUseCase'),
+    UpdateProblemStatusUseCase: Symbol.for('UpdateProblemStatusUseCase'),
 };
 
 export { APP_IDENTIFIERS };
