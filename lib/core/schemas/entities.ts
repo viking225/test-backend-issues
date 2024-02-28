@@ -19,6 +19,11 @@ export enum ProblemStatus {
     open = 'open',
     closed = 'closed',
 }
+
+export enum TicketStatus {
+    run = 'run',
+    end = 'end',
+}
 export class Problem {
     id: string;
     video: string;
@@ -32,4 +37,11 @@ export class Problem {
 
 export class Ticket {
     id: string;
+    app: 'ThirdPartyApp1' | 'ThirdPartyApp2';
+    status: TicketStatus;
+    reference: string;
+
+    constructor(data: Partial<Ticket> = {}) {
+        Object.assign(this, data);
+    }
 }

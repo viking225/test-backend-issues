@@ -30,7 +30,7 @@ export function buildProblemController(container: Container) {
                 });
                 return res.sendStatus(200);
             } catch (e) {
-                console.error(e)
+                console.error(e);
                 if (e instanceof ProblemInvalidStatusError) {
                     return res.sendStatus(400);
                 }
