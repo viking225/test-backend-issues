@@ -1,7 +1,12 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'inversify';
 import { UseCase } from '../schemas/UseCase';
-import { Problem, ProblemStatus } from '../schemas/entities';
+import {
+    Issue,
+    IssueStatus,
+    Problem,
+    ProblemStatus,
+} from '../schemas/entities';
 import { APP_IDENTIFIERS } from '../constants/symbol';
 import { ProblemRepository } from '../repositories/ProblemRepository';
 import {
@@ -38,7 +43,7 @@ export class UpdateProblemStatus extends UseCase<
         }
 
         const issues = this.issueRepo.getByProblemId(problem.id);
-        
+
         const updateStatusIndex = ProblemAvailableStatus.findIndex(
             (s) => s === this.command.status
         );
@@ -54,7 +59,28 @@ export class UpdateProblemStatus extends UseCase<
         problem.status = this.command.status;
 
         this.problemRepo.saveOne(problem);
+        const issueStatus = this.getIssueStatus(problem.status);
+
+        if (issues.length) {
+            this.issueRepo.save(
+                issues.map(
+                    (issue) =>
+                        new Issue({
+                            ...issue,
+                            status: issueStatus,
+                        })
+                )
+            );
+        }
 
         return problem;
+    }
+
+    private getIssueStatus(problemStatus: ProblemStatus): IssueStatus {
+        return [ProblemStatus.pending, ProblemStatus.ready].includes(
+            problemStatus
+        )
+            ? IssueStatus.waiting
+            : IssueStatus.grouped;
     }
 }

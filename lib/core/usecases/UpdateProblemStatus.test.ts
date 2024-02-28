@@ -1,4 +1,9 @@
-import { Issue, IssueStatus, Problem, ProblemStatus } from '../schemas/entities';
+import {
+    Issue,
+    IssueStatus,
+    Problem,
+    ProblemStatus,
+} from '../schemas/entities';
 import {
     ProblemInvalidStatusError,
     ProblemNotFoundError,
@@ -88,39 +93,45 @@ describe('UpdateProblemStatus', () => {
             new Issue({
                 status: IssueStatus.waiting,
                 id: '1',
-                comment: "dos"
+                comment: 'dos',
             }),
             new Issue({
                 status: IssueStatus.waiting,
                 id: '2',
-                comment: 'trree'
+                comment: 'trree',
+            }),
+        ]);
+
+        sut.thenShouldReturn(
+            new Problem({
+                status: ProblemStatus.open,
+                id: problemId,
             })
-        ])
+        );
 
         sut.thenShouldHaveSaveIssues([
             new Issue({
                 status: IssueStatus.grouped,
                 id: '1',
-                comment: "dos"
+                comment: 'dos',
             }),
             new Issue({
                 status: IssueStatus.grouped,
                 id: '2',
-                comment: 'trree'
-            })
-        ])
-
-    })
+                comment: 'trree',
+            }),
+        ]);
+    });
 
     function createSut() {
-        const saveIssueMock = jest.fn()
-        const getByProblemIdMock = jest.fn()
+        const saveIssueMock = jest.fn();
+        const getByProblemIdMock = jest.fn();
 
         const getOneProblemRepo = jest.fn();
         const issueRepo = {
             save: saveIssueMock,
-            getByProblemId: getByProblemIdMock
-        } as any
+            getByProblemId: getByProblemIdMock.mockImplementation(() => []),
+        } as any;
         const problemRepo = {
             get: getOneProblemRepo,
             saveOne: jest.fn(),
@@ -136,7 +147,7 @@ describe('UpdateProblemStatus', () => {
         }
 
         function whenIssuesIsFound(issues: Issue[]) {
-            getByProblemIdMock.mockResolvedValueOnce(issues);
+            getByProblemIdMock.mockImplementation(() => issues);
         }
 
         function thenShouldThrowInvalidStatusException() {
@@ -152,7 +163,7 @@ describe('UpdateProblemStatus', () => {
         }
 
         function thenShouldHaveSaveIssues(issues: Issue[]) {
-            expect(saveIssueMock).toHaveBeenCalledWith(issues)
+            expect(saveIssueMock).toHaveBeenCalledWith(issues);
         }
 
         return {

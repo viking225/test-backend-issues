@@ -1,6 +1,6 @@
 export enum IssueStatus {
     waiting = 'waiting',
-    grouped = 'grouped'
+    grouped = 'grouped',
 }
 export class Issue {
     id: string;
