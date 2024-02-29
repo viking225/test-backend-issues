@@ -54,6 +54,7 @@ export class CreateTicketOnThirdParty extends UseCase<
 
         const ticketToSave = new Ticket({
             app: this.command.type,
+            problemId: problem.id,
         });
         const ticketParameter = { problemId: problem.id, owner: 'csTeam' };
 

@@ -46,6 +46,7 @@ export class Ticket {
     app: 'ThirdPartyApp1' | 'ThirdPartyApp2';
     status: TicketStatus;
     reference: string;
+    problemId: string;
 
     constructor(data: Partial<Ticket> = {}) {
         Object.assign(this, data);
