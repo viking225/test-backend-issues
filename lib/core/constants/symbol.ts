@@ -9,6 +9,9 @@ const APP_IDENTIFIERS = {
     // UseCases
     CreateIssuesUseCase: Symbol.for('CreateIssuesUseCase'),
     UpdateProblemStatusUseCase: Symbol.for('UpdateProblemStatusUseCase'),
+    CreateTicketOnThirdPartyUseCase: Symbol.for(
+        'CreateTicketOnThirdPartyUseCase'
+    ),
 };
 
 export { APP_IDENTIFIERS };

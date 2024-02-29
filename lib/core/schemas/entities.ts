@@ -24,6 +24,12 @@ export enum TicketStatus {
     run = 'run',
     end = 'end',
 }
+
+export enum TicketAppType {
+    ThirdPartyApp1 = 'ThirdPartyApp1',
+    ThirdPartyApp2 = 'ThirdPartyApp2',
+}
+
 export class Problem {
     id: string;
     video: string;

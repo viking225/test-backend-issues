@@ -76,8 +76,8 @@ describe('CreateTicketOnThirdParty', () => {
         const ticketRepo = {
             saveOne: jest.fn().mockImplementation((ticket) => ticket),
         } as any;
-        const firstParty = {createTicket: jest.fn()} as any;
-        const secondParty = {createTicket: jest.fn()} as any;
+        const firstParty = { createTicket: jest.fn() } as any;
+        const secondParty = { createTicket: jest.fn() } as any;
 
         const uc = new CreateTicketOnThirdParty(
             problemRepo,

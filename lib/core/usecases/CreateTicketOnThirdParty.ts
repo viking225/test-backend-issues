@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'inversify';
 import { UseCase } from '../schemas/UseCase';
-import { ProblemStatus, Ticket } from '../schemas/entities';
+import { ProblemStatus, Ticket, TicketAppType } from '../schemas/entities';
 import { APP_IDENTIFIERS } from '../constants/symbol';
 import { ProblemRepository } from '../repositories/ProblemRepository';
 import { TicketRepository } from '../repositories/TicketRepository';
@@ -13,7 +13,7 @@ import {
 import { TicketThirdPartyService } from '../schemas/TicketThirdPartyService';
 
 export type CreateTicketOnThirdPartyCommand = {
-    type: 'ThirdPartyApp1' | 'ThirdPartyApp2';
+    type: TicketAppType;
     problemId: string;
 };
 @injectable()
@@ -53,7 +53,7 @@ export class CreateTicketOnThirdParty extends UseCase<
         }
 
         const ticketToSave = new Ticket({
-            app: this.command.type
+            app: this.command.type,
         });
         const ticketParameter = { problemId: problem.id, owner: 'csTeam' };
 
@@ -66,6 +66,5 @@ export class CreateTicketOnThirdParty extends UseCase<
         }
 
         return this.ticketRepo.saveOne(ticketToSave);
-
     }
 }
