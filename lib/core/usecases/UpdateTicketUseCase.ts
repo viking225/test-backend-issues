@@ -8,6 +8,7 @@ import { TicketThirdPartyService } from '../schemas/TicketThirdPartyService';
 import {
     ProblemInvalidStatusError,
     ProblemNotFoundError,
+    TicketNotFoundError,
     TicketThridPartyTypeError,
 } from '../schemas/errors';
 import { TicketRepository } from '../repositories/TicketRepository';
@@ -61,6 +62,10 @@ export class UpdateTicketUseCase extends UseCase<
             this.command.type
         );
 
+        if (!ticket) {
+            throw new TicketNotFoundError();
+        }
+
         const thirdPartyParams = {
             reference: ticket.reference,
             issueCount: issues.length,
@@ -72,6 +77,6 @@ export class UpdateTicketUseCase extends UseCase<
             this.secondThirdParty.updateTicketIssueCount(thirdPartyParams);
         }
 
-        return ticket
+        return ticket;
     }
 }

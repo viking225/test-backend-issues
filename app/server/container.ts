@@ -9,6 +9,7 @@ import { FirstThirdPartyService } from '../../lib/adapters/FirstThirdPartyServic
 import { SecondThirdPartyService } from '../../lib/adapters/SecondThirdPartyService';
 import { CreateTicketOnThirdParty } from '../../lib/core/usecases/CreateTicketOnThirdParty';
 import { InMemoryTicketRepository } from '../../lib/adapters/InMemoryTicketRepository';
+import { UpdateTicketUseCase } from '../../lib/core/usecases/UpdateTicketUseCase';
 
 export function createAppContainer(database: MemoryDbConnection): Container {
     const container = new Container();
@@ -16,6 +17,7 @@ export function createAppContainer(database: MemoryDbConnection): Container {
     container.bind(APP_IDENTIFIERS.ThirdParty1).to(FirstThirdPartyService);
     container.bind(APP_IDENTIFIERS.ThidParty2).to(SecondThirdPartyService);
     // UseCases
+    container.bind(APP_IDENTIFIERS.UpdateTicketUseCase).to(UpdateTicketUseCase);
     container
         .bind(APP_IDENTIFIERS.CreateTicketOnThirdPartyUseCase)
         .to(CreateTicketOnThirdParty);

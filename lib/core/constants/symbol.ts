@@ -7,6 +7,7 @@ const APP_IDENTIFIERS = {
     ProblemRepository: Symbol.for('ProblemRepository'),
     TicketRepo: Symbol.for('ticketRepo'),
     // UseCases
+    UpdateTicketUseCase: Symbol.for('UpdateTicketUseCase'),
     CreateIssuesUseCase: Symbol.for('CreateIssuesUseCase'),
     UpdateProblemStatusUseCase: Symbol.for('UpdateProblemStatusUseCase'),
     CreateTicketOnThirdPartyUseCase: Symbol.for(
